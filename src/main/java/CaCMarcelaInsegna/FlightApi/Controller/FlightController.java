@@ -1,6 +1,7 @@
 package CaCMarcelaInsegna.FlightApi.Controller;
 
 import CaCMarcelaInsegna.FlightApi.Model.Flight;
+import CaCMarcelaInsegna.FlightApi.Model.FlightDto;
 import CaCMarcelaInsegna.FlightApi.Service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,12 @@ public class FlightController {
     public List<Flight> traerVuelos(){
         return flightService.traerTodosLosVuelos();
     }
+
+    @GetMapping("/vuelosDto")
+    public List<FlightDto> traerVuelosDto(){
+        return flightService.traerLosVuelosDto();
+    }
+
     @PostMapping("/crear")
     public void crearUnVuelo (@RequestBody Flight flight){
         flightService.crearVuelo(flight);

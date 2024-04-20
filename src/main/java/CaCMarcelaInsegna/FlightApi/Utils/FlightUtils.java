@@ -48,7 +48,7 @@ public class FlightUtils {
         return flightDtos;
     }
 
-    @Bean
+    //@Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
