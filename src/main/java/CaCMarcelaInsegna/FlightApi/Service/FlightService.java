@@ -30,6 +30,7 @@ public class FlightService {
     public void borrarVueloPorId(Long id) {
         flightRepository.deleteById(id);
     }
+
     public Flight actualizarVuelo(Flight flight) {
         flightRepository.save(flight);
         return flightRepository.findById(flight.getId()).orElse(null);
@@ -44,14 +45,22 @@ public class FlightService {
     FlightUtils flightUtils;
 
     public List<FlightDto> traerLosVuelosDto(){
-        double dolarPrice = getDolar();
+        double dolarPrice = traerDolar();
         List<Flight> flights =flightRepository.findAll();
         return FlightUtils.flightMapper(flights,dolarPrice);}
 
     @Autowired
     FlightConfiguration flightConfiguration;
 
-    private double getDolar() {
+    //METODO PARA TRAER OFERTAS SEGUN PARAMETRO EN LA CONSULTA DE POSTMAN
+
+    public List<Flight> traerOfertas(Integer precioOferta){
+        List<Flight> flights = flightRepository.findAll();
+        return flightUtils.detectarOfertas(flights, precioOferta);
+    }
+
+
+    private double traerDolar() {
         return flightConfiguration.fetchDolar() //esta linea devuelve el dolar
                 .getPromedio();
         //Dolar dolar = flightConfiguration.fetchDolar();

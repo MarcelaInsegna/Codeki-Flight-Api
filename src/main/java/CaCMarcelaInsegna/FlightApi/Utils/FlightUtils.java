@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Component
 
 public class FlightUtils {
-    public List<Flight> detectOffers(List<Flight> flights, Integer offerPrice) {
+    public List<Flight> detectarOfertas(List<Flight> flights, Integer offerPrice) {
         /*List<Flight> vuelosOferta = new ArrayList<>();
 
         for (Flight flight : flights) {
@@ -48,6 +48,7 @@ public class FlightUtils {
         return flightDtos;
     }
 
+
     //@Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
@@ -59,13 +60,19 @@ public class FlightUtils {
         String apiUrl = "https://dolarapi.com/v1/dolares/tarjeta";
         //solicitud a esa ruta y la clase que voy a usar para es consulta
         return restTemplate.getForObject(apiUrl, Dolar.class);
-
     }
     public Dolar[] fetchAllDolars(){
         RestTemplate restTemplate = restTemplate();
         String apiUrl = "https://dolarapi.com/v1/dolares";
         return restTemplate.getForEntity(apiUrl, Dolar[].class).getBody(); //trae el objeto pasando url y la clase
 
+    }
+    public List<FlightDto> flightMapperDto(List <Flight> flights, double price){
 
+        return flights.stream()
+                .map(flight -> new FlightDto(flight.getId(), flight.getOrigen(), flight.getDestino(),
+                        flight.getFechaHoraSalida(), flight.getFechaHoraLlegada(),
+                        flight.getPrecio() * price, flight.getFrecuencia()))
+                .collect(Collectors.toList());
     }
 }

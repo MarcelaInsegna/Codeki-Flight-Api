@@ -29,6 +29,7 @@ public class FlightController {
     public void crearUnVuelo (@RequestBody Flight flight){
         flightService.crearVuelo(flight);
     }
+
     @GetMapping("/{id}") // las {} sirven para indicar que es un parametro
     public Flight buscarPorId(@PathVariable Long id){
         return flightService.buscarVueloPorId(id);
@@ -48,9 +49,25 @@ public class FlightController {
     public List<Flight> vueloPorOrigen (@RequestParam String origen){
         return flightService.traerPorOrigen(origen);
     }
+
     @GetMapping("/origen-destino")
     public List<Flight> vueloPorOrigenDestino (@RequestParam String origen, @RequestParam String destino){
         return flightService.traerPorOrigenDestino(origen, destino);
     }
+
+
+    //    CONSULTA CON VALOR DE OFERTA ESTABLECIDO
+//    @GetMapping("/ofertas")
+//    public List<Flight> getOffers(){
+//        Integer offerPrice = 200;
+//        return  flightService.traerOfertas(offerPrice);
+//    }
+    //CONSULTA CON VALOR PASADO POR PARAMETRO
+    @GetMapping("/ofertas/{precioOferta}")
+    public List<Flight> getOffers(@PathVariable Integer precioOferta){
+        return flightService.traerOfertas(precioOferta);
+    }
+
+
 
 }

@@ -5,14 +5,20 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@AllArgsConstructor
+@Getter @Setter
+
 
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long Id;
+    public Long id;
     public String nombre;
     public String banner;
+
+
+
 }

@@ -1,10 +1,12 @@
 package CaCMarcelaInsegna.FlightApi.Model;
 
 import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Data
+
 public class Dolar {
     private String moneda;
     private String casa;
